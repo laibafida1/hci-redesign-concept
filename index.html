@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edial Boarding Kennels & Cattery: Redesign Concept</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #EAF2E1;
+    --paper-deep: #D9E9C9;
+    --paper-card: #F6FAF0;
+    --ink: #22331F;
+    --ink-soft: #52694C;
+    --green: #1E3A2A;
+    --green-light: #3C5C42;
+    --oxblood: #B8791C;
+    --oxblood-dark: #936014;
+    --brass: #B8791C;
+    --line: #C3DCB0;
+    --focus: #B8791C;
+    --rust: #B5562D;
+    --rust-dark: #8F4322;
+    --teal: #2E6B63;
+    --teal-dark: #204E48;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper: #131A13;
+      --paper-deep: #0F140F;
+      --paper-card: #1C241B;
+      --ink: #E7F0DE;
+      --ink-soft: #A9BFA0;
+      --green: #9FC4A7;
+      --green-light: #8FB396;
+      --oxblood: #E0AA4E;
+      --oxblood-dark: #EFC17A;
+      --brass: #E0AA4E;
+      --line: #33422F;
+      --focus: #E0AA4E;
+      --rust: #E08A5F;
+      --rust-dark: #F0A87D;
+      --teal: #7FC2B8;
+      --teal-dark: #A9D8D0;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper: #131A13; --paper-deep: #0F140F; --paper-card: #1C241B;
+    --ink: #E7F0DE; --ink-soft: #A9BFA0; --green: #9FC4A7; --green-light: #8FB396;
+    --oxblood: #E0AA4E; --oxblood-dark: #EFC17A; --brass: #E0AA4E; --line: #33422F; --focus: #E0AA4E;
+    --rust: #E08A5F; --rust-dark: #F0A87D; --teal: #7FC2B8; --teal-dark: #A9D8D0;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background-color:var(--paper);
+    background-image:
+      radial-gradient(ellipse at 15% 0%, rgba(255,255,255,0.10), transparent 55%),
+      radial-gradient(ellipse at 100% 100%, rgba(0,0,0,0.07), transparent 60%);
+    color:var(--ink);
+    font-family:'Work Sans',system-ui,sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{ font-family:'Cormorant Garamond',Georgia,serif; color:var(--ink); margin:0 0 .3em 0; line-height:1.1; font-weight:600; }
+  a{color:var(--oxblood);}
+  button{font-family:inherit;}
+  :focus-visible{outline:2.5px solid var(--focus); outline-offset:3px;}
+  svg{max-width:100%;}
+  .skip-link{position:absolute; left:-999px; top:0; background:var(--paper-card); padding:.6em 1em; z-index:100;}
+  .skip-link:focus{left:1em; top:1em;}
+
+  header.site{ position:sticky; top:0; z-index:20; background:var(--green); border-bottom:3px solid var(--brass); padding:0; }
+  .header-inner{ max-width:1080px; margin:0 auto; display:flex; align-items:center; gap:1.4rem; padding:.55rem 1.2rem; flex-wrap:wrap; }
+  .brand{display:flex; align-items:center; gap:.7rem; margin-right:auto;}
+  .brand svg{width:40px; height:40px; flex-shrink:0;}
+  .crest-name{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:1.15rem; color:var(--paper); line-height:1.15;}
+  .crest-name small{display:block; font-family:'Work Sans',sans-serif; font-weight:400; font-size:.66rem; letter-spacing:.03em; color:var(--paper); opacity:.72;}
+
+  nav.main-nav{display:flex; flex-wrap:wrap; gap:1.15rem;}
+  nav.main-nav button{
+    background:none; border:none; color:var(--paper); opacity:.72;
+    font-size:.92rem; padding:.3rem 0; cursor:pointer; position:relative;
+    border-bottom:2px solid transparent; transition:opacity .15s, border-color .15s;
+  }
+  nav.main-nav button:hover{opacity:1;}
+  nav.main-nav button[aria-current="page"]{opacity:1; border-bottom-color:var(--brass);}
+
+  .cta-btn{
+    background:var(--oxblood); color:var(--paper-card); border:1px solid var(--oxblood-dark);
+    padding:.55rem 1.05rem; font-size:.9rem; cursor:pointer; font-weight:600;
+    border-radius:2px; transition:background .15s, transform .1s;
+  }
+  .cta-btn:hover{background:var(--oxblood-dark);}
+  .cta-btn:active{transform:translateY(1px);}
+  .cta-btn.ghost{background:transparent; border:1.5px solid var(--green); color:var(--ink);}
+  :root[data-theme="dark"] .cta-btn.ghost, @media (prefers-color-scheme:dark){.cta-btn.ghost{border-color:var(--green-light);}}
+
+  main{max-width:1080px; margin:0 auto; padding:2.6rem 1.2rem 4rem;}
+  .view{display:none;}
+  .view.active{display:block;}
+
+  .hero{ padding-bottom:2.6rem; border-bottom:1px solid var(--line); }
+  .hero--simple > div{max-width:62ch;}
+  .hero h1{font-size:clamp(1.9rem,4.4vw,2.9rem); font-style:italic;}
+  .hero p.lead{font-size:1.08rem; color:var(--ink-soft); max-width:46ch;}
+  .hero-actions{display:flex; gap:.8rem; flex-wrap:wrap; margin-top:1.3rem;}
+
+  .fact-line{ margin-top:1.3rem; font-size:.85rem; color:var(--ink-soft); display:flex; flex-wrap:wrap; gap:0; }
+  .fact-line span{padding:0 .8rem; border-right:1px solid var(--line);}
+  .fact-line span:first-child{padding-left:0;}
+  .fact-line span:last-child{border-right:none;}
+
+  section.block{padding:2.4rem 0; border-bottom:1px solid var(--line);}
+  section.block:last-of-type{border-bottom:none;}
+  .block h2{font-size:1.7rem; font-style:italic;}
+  .block > p.intro{color:var(--ink-soft); max-width:62ch; margin-bottom:1.6rem; font-size:1rem;}
+
+  /* Ledger list — replaces generic card grid for facility features */
+  .ledger{margin-top:.6rem;}
+  .ledger-row{ display:grid; grid-template-columns:190px 1fr; gap:1.4rem; padding:.95rem 0; border-top:1px solid var(--line); }
+  .ledger-row:last-child{border-bottom:1px solid var(--line);}
+  .ledger-row dt{font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:600; color:var(--green);}
+  .ledger-row dd{margin:0; color:var(--ink-soft); font-size:.95rem;}
+  @media (max-width:560px){ .ledger-row{grid-template-columns:1fr; gap:.25rem;} }
+
+  .stamp-note{ margin-top:1.7rem; padding-left:1rem; border-left:3px solid var(--line); max-width:64ch; }
+  .stamp-note p{margin:0; font-size:.94rem; color:var(--ink-soft); line-height:1.65;}
+  .stamp-note .lead{ font-weight:700; color:var(--ink); }
+  .stamp-note--dog{border-left-color:var(--rust);}
+  .stamp-note--cat{border-left-color:var(--teal);}
+
+  .cta-btn--dog{background:var(--rust); border-color:var(--rust-dark);}
+  .cta-btn--dog:hover{background:var(--rust-dark);}
+  .cta-btn--cat{background:var(--teal); border-color:var(--teal-dark);}
+  .cta-btn--cat:hover{background:var(--teal-dark);}
+
+  /* Rates — ticket stub style, replaces rounded SaaS cards */
+  .stub-row{display:flex; flex-wrap:wrap; gap:1rem; margin-top:1.1rem;}
+  .stub{
+    flex:1 1 150px; background:var(--paper-card);
+    border:1px dashed var(--line); position:relative; padding:1.2rem 1rem 1rem;
+    text-align:center;
+  }
+  .stub::before, .stub::after{
+    content:""; position:absolute; width:16px; height:16px; background:var(--paper);
+    border-radius:50%; top:50%; transform:translateY(-50%);
+  }
+  .stub::before{left:-9px;} .stub::after{right:-9px;}
+  .stub .ribbon-tab{ font-size:.72rem; letter-spacing:.04em; color:var(--paper); background:var(--green); display:inline-block; padding:.15rem .6rem; margin-bottom:.6rem; }
+  .stub .stamp-price{ width:60px; height:60px; border:2px solid var(--brass); border-radius:50%; margin:.2rem auto .5rem; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-weight:700; font-size:1.15rem; color:var(--brass); }
+  .stub .examples{font-size:.76rem; color:var(--ink-soft); margin-top:.2rem;}
+  .stub--dog .ribbon-tab{background:var(--rust);}
+  .stub--dog .stamp-price{border-color:var(--rust); color:var(--rust);}
+  .stub--cat .ribbon-tab{background:var(--teal);}
+  .stub--cat .stamp-price{border-color:var(--teal); color:var(--teal);}
+
+  /* Pedigree list for terriers page */
+  .pedigree{margin-top:1.2rem; border-top:1px solid var(--line);}
+  .pedigree-row{ display:flex; gap:1.1rem; align-items:flex-start; padding:1.1rem 0; border-bottom:1px solid var(--line); }
+  .pedigree-row svg{width:34px; height:34px; flex-shrink:0; color:var(--oxblood); margin-top:.15rem;}
+  .pedigree-row .yr{font-family:'Cormorant Garamond',serif; font-weight:700; color:var(--brass); font-size:1rem; min-width:3.4rem; display:inline-block;}
+  .pedigree-row p{margin:0; color:var(--ink-soft); font-size:.95rem;}
+
+  /* Contact — paper form */
+  form.enquiry{display:grid; gap:1.1rem; max-width:520px; margin-top:.4rem;}
+  .field{display:grid; gap:.3rem;}
+  .field label{font-size:.82rem; font-weight:600; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.03em;}
+  .field input, .field select, .field textarea{
+    padding:.5rem .1rem; border:none; border-bottom:1.5px solid var(--line);
+    background:transparent; color:var(--ink); font-family:inherit; font-size:1rem; border-radius:0;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{border-bottom-color:var(--oxblood);}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:1.1rem;}
+  @media (max-width:520px){ .field-row{grid-template-columns:1fr;} }
+  .form-note{font-size:.78rem; color:var(--ink-soft); font-style:italic; margin-top:.2rem;}
+
+  .confirm-panel{ border:1px solid var(--line); background:var(--paper-card); padding:1.6rem; max-width:480px; position:relative; }
+  .confirm-panel .stamp{ width:64px; height:64px; border:2.5px solid var(--oxblood); border-radius:50%; color:var(--oxblood); display:flex; align-items:center; justify-content:center; transform:rotate(-8deg); margin-bottom:.8rem; font-family:'Cormorant Garamond',serif; font-weight:700; font-size:.62rem; text-align:center; letter-spacing:.02em; }
+  .confirm-panel p{margin:0; color:var(--ink-soft); font-size:.93rem;}
+
+  .contact-direct{display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:0; margin-top:2rem; border-top:1px solid var(--line);}
+  .contact-direct div{padding:1.1rem 1.3rem; border-right:1px solid var(--line);}
+  .contact-direct div:last-child{border-right:none;}
+  .contact-direct h3{font-size:1rem; font-style:italic; margin-bottom:.3rem;}
+  .contact-direct p{margin:0; font-size:.9rem; color:var(--ink-soft);}
+
+  footer.site{ border-top:2px solid var(--brass); padding:1.6rem 1.2rem 2.2rem; margin-top:1rem; color:var(--ink-soft); font-size:.8rem; text-align:center; }
+  footer.site p{max-width:60ch; margin:0.3em auto;}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+<header class="site">
+  <div class="header-inner">
+    <div class="brand">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M24 3 L42 10 V24 C42 34 34 41 24 45 C14 41 6 34 6 24 V10 Z" fill="none" stroke="#E9DFC4" stroke-width="1.6"/>
+        <path d="M24 3 L42 10 V24 C42 34 34 41 24 45 C14 41 6 34 6 24 V10 Z" fill="#E9DFC4" opacity="0.08"/>
+        <circle cx="24" cy="21" r="5.2" fill="#E9DFC4"/>
+        <circle cx="15.5" cy="14" r="2.6" fill="#E9DFC4"/>
+        <circle cx="32.5" cy="14" r="2.6" fill="#E9DFC4"/>
+        <circle cx="19" cy="9.5" r="2.2" fill="#E9DFC4"/>
+        <circle cx="29" cy="9.5" r="2.2" fill="#E9DFC4"/>
+        <path d="M17 29 Q24 34 31 29" stroke="#E9DFC4" stroke-width="1.4" fill="none"/>
+      </svg>
+      <span class="crest-name">Edial Kennels &amp; Cattery<small>ESTABLISHED 1979 · BURNTWOOD, STAFFS</small></span>
+    </div>
+    <nav class="main-nav" aria-label="Site sections">
+      <button data-view="home" aria-current="page">Home</button>
+      <button data-view="kennels">Kennels</button>
+      <button data-view="cattery">Cattery</button>
+      <button data-view="grooming">Grooming</button>
+      <button data-view="rates">Rates</button>
+      <button data-view="terriers">Our Terriers</button>
+      <button data-view="contact">Contact</button>
+    </nav>
+    <button class="cta-btn" data-view="contact">Enquire about a stay</button>
+  </div>
+</header>
+
+<main id="main-content">
+
+  <!-- HOME -->
+  <section class="view active" data-section="home" aria-labelledby="home-h1">
+    <div class="hero hero--simple">
+      <div>
+        <h1 id="home-h1">A second home for your dog or cat, kept by the same family since 1979.</h1>
+        <p class="lead">Edial is a small boarding kennels and cattery on Lichfield Road, Burntwood. It's licensed by Lichfield District Council, and run by people who have looked after other people's pets for over forty-five years.</p>
+        <div class="hero-actions">
+          <button class="cta-btn" data-view="contact">Check availability</button>
+          <button class="cta-btn ghost" data-view="kennels">See the kennels</button>
+        </div>
+        <div class="fact-line">
+          <span>Licence No. 19/00534/ANIMAL</span>
+          <span>Day boarding welcome</span>
+          <span>Vaccinated pets only</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="block">
+      <h2>Hours &amp; visiting</h2>
+      <p class="intro">Come and see the kennels before you book. Inspections are welcome every morning.</p>
+      <dl class="ledger">
+        <div class="ledger-row"><dt>Monday – Saturday</dt><dd>8–11am and 3–5pm</dd></div>
+        <div class="ledger-row"><dt>Sunday</dt><dd>9–11am only</dd></div>
+        <div class="ledger-row"><dt>Where we are</dt><dd>Lichfield Road, Burntwood, Staffordshire, WS7 0HU</dd></div>
+      </dl>
+      <p class="stamp-note"><span class="lead">Note:</span> all pets must have a current vaccination certificate, and kennel cough vaccines need to be given at least two weeks before your stay.</p>
+    </section>
+  </section>
+
+  <!-- KENNELS -->
+  <section class="view" data-section="kennels" aria-labelledby="kennels-h1">
+    <h1 id="kennels-h1" style="font-style:italic;">Dog kennels</h1>
+    <p class="intro">Forty refurbished kennels, each with a covered bedding area and an outdoor run onto grass or open fields.</p>
+    <dl class="ledger">
+      <div class="ledger-row"><dt>Bedding &amp; run</dt><dd>Every kennel has its own sheltered bedding area plus an outdoor run with a view over grass or fields.</dd></div>
+      <div class="ledger-row"><dt>Exercise routine</dt><dd>Twice a day in summer, three times in winter, around 7am, 11am and 4–5pm.</dd></div>
+      <div class="ledger-row"><dt>Toy dog courtyard</dt><dd>Smaller breeds get their own separate courtyard and grass area, away from larger dogs.</dd></div>
+      <div class="ledger-row"><dt>Winter heating</dt><dd>Provided through the winter months at no extra cost.</dd></div>
+    </dl>
+    <p class="stamp-note stamp-note--dog"><span class="lead">Note:</span> bring your dog's own treats and bedding if you'd like. Inspections are welcome 9–11am, Monday to Saturday.</p>
+    <div class="hero-actions" style="margin-top:1.6rem;"><button class="cta-btn cta-btn--dog" data-view="rates">See dog boarding rates</button></div>
+  </section>
+
+  <!-- CATTERY -->
+  <section class="view" data-section="cattery" aria-labelledby="cattery-h1">
+    <h1 id="cattery-h1" style="font-style:italic;">Cattery</h1>
+    <p class="intro">Eighteen penthouse-style cat pens, each a roomy 16ft x 3ft, light and airy, with bedding and extra shelving.</p>
+    <dl class="ledger">
+      <div class="ledger-row"><dt>Penthouse pens</dt><dd>Each pen includes a bedding area, ladders and extra shelving for climbing and resting.</dd></div>
+      <div class="ledger-row"><dt>Family pens</dt><dd>Three large family pens for cats from the same household who'd like to share.</dd></div>
+      <div class="ledger-row"><dt>Heated bedding</dt><dd>Every shelf has a heated pad through winter, included in the daily rate.</dd></div>
+      <div class="ledger-row"><dt>Food provided</dt><dd>Whiskas or Felix wet pouches, and Go-Cat or Whiskas dry, or bring your own if your cat has a specific diet.</dd></div>
+    </dl>
+    <p class="stamp-note stamp-note--cat"><span class="lead">Note:</span> a current vaccination certificate for Cat Flu (FHV) and Feline Enteritis (FPV/FVRCP) is required at drop-off.</p>
+    <div class="hero-actions" style="margin-top:1.6rem;"><button class="cta-btn cta-btn--cat" data-view="rates">See cattery rates</button></div>
+  </section>
+
+  <!-- GROOMING -->
+  <section class="view" data-section="grooming" aria-labelledby="grooming-h1">
+    <h1 id="grooming-h1" style="font-style:italic;">Grooming</h1>
+    <p class="intro">Run by Sharron at the K9 Clipping &amp; Grooming parlour on site, with more than thirty years' experience.</p>
+    <dl class="ledger">
+      <div class="ledger-row"><dt>Bathing</dt><dd>From £15</dd></div>
+      <div class="ledger-row"><dt>Clipping &amp; scissoring</dt><dd>Full coat trims to breed standard, or a simple tidy-up.</dd></div>
+      <div class="ledger-row"><dt>Nail care</dt><dd>Nail trims for dogs of any size.</dd></div>
+      <div class="ledger-row"><dt>Flea treatments</dt><dd>Available as a standalone treatment or added to a groom.</dd></div>
+    </dl>
+    <p class="stamp-note"><span class="lead">Note:</span> open 9am–4:30pm, Monday to Saturday. Call <a href="tel:07752214378">07752 214378</a> directly to book. A good time is on the way home from a stay.</p>
+  </section>
+
+  <!-- RATES -->
+  <section class="view" data-section="rates" aria-labelledby="rates-h1">
+    <h1 id="rates-h1" style="font-style:italic;">Rates</h1>
+    <p class="intro">Daily rates, VAT included. Pick the size closest to your dog. Pricing is banded by size rather than breed, so a mixed breed or rescue is easy to place.</p>
+    <div class="stub-row">
+      <div class="stub stub--dog"><div class="ribbon-tab">SMALL</div><div class="stamp-price">£13</div><div class="examples">Shih Tzu, Westie, Toy Poodle, Yorkie</div></div>
+      <div class="stub stub--dog"><div class="ribbon-tab">MEDIUM</div><div class="stamp-price">£14</div><div class="examples">Beagle, Springer, Border Collie, Cocker</div></div>
+      <div class="stub stub--dog"><div class="ribbon-tab">LARGE</div><div class="stamp-price">£15</div><div class="examples">Labrador, Staffie, Dalmatian, Golden Retriever</div></div>
+      <div class="stub stub--dog"><div class="ribbon-tab">X-LARGE</div><div class="stamp-price">£16</div><div class="examples">Rottweiler, Doberman, German Shepherd, Large Boxer</div></div>
+      <div class="stub stub--dog"><div class="ribbon-tab">XX-LARGE</div><div class="stamp-price">£17</div><div class="examples">Great Dane, Malamute, Newfoundland</div></div>
+    </div>
+    <h2 style="margin-top:2.2rem;">Cattery rates</h2>
+    <div class="stub-row">
+      <div class="stub stub--cat"><div class="ribbon-tab">SINGLE CAT</div><div class="stamp-price">£8.50</div><div class="examples">per day</div></div>
+      <div class="stub stub--cat"><div class="ribbon-tab">TWO SHARING</div><div class="stamp-price">£17</div><div class="examples">per day, same pen</div></div>
+    </div>
+    <p class="stamp-note"><span class="lead">Note:</span> if your pet isn't insured, there's a £4-a-week charge that covers up to £300 of vet treatment if it's ever needed during their stay.</p>
+  </section>
+
+  <!-- TERRIERS -->
+  <section class="view" data-section="terriers" aria-labelledby="terriers-h1">
+    <h1 id="terriers-h1" style="font-style:italic;">Naylenor Yorkshire Terriers</h1>
+    <p class="intro">Alongside the kennels, the Naylor family has bred award-winning Yorkshire Terriers under the Naylenor prefix since the early 1970s.</p>
+    <div class="pedigree">
+      <div class="pedigree-row">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 5.4 5.9.6-4.4 4 1.2 5.8L12 14.9 6.9 17.8l1.2-5.8-4.4-4 5.9-.6z"/></svg>
+        <div><span class="yr">1971</span><p>Ch. Brave Warrior of Naylenor, the family's first champion.</p></div>
+      </div>
+      <div class="pedigree-row">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 5.4 5.9.6-4.4 4 1.2 5.8L12 14.9 6.9 17.8l1.2-5.8-4.4-4 5.9-.6z"/></svg>
+        <div><span class="yr">•</span><p>Ch. Blue Monarch, Ch. Regal Warrior and Ch. Battle Cry, who went on to also become a Japanese Champion.</p></div>
+      </div>
+      <div class="pedigree-row">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 5.4 5.9.6-4.4 4 1.2 5.8L12 14.9 6.9 17.8l1.2-5.8-4.4-4 5.9-.6z"/></svg>
+        <div><span class="yr">1979</span><p>Ch. Magic Moment became Top Female Yorkie in Britain.</p></div>
+      </div>
+      <div class="pedigree-row">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 5.4 5.9.6-4.4 4 1.2 5.8L12 14.9 6.9 17.8l1.2-5.8-4.4-4 5.9-.6z"/></svg>
+        <div><span class="yr">•</span><p>Magic Moment's son, Ch. Naylenor Crown Jewel, and his son, Ch. Naylenor Jewel in the Crown, continued the line.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="view" data-section="contact" aria-labelledby="contact-h1">
+    <h1 id="contact-h1" style="font-style:italic;">Enquire about a stay</h1>
+    <p class="intro">Tell us a bit about your pet and preferred dates, or ring/email us directly any time.</p>
+    <div id="enquiry-wrap">
+      <form class="enquiry" id="enquiry-form">
+        <div class="field-row">
+          <div class="field"><label for="f-name">Your name</label><input id="f-name" required></div>
+          <div class="field"><label for="f-phone">Phone number</label><input id="f-phone" type="tel" required></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="f-pet">Pet type</label><select id="f-pet"><option>Dog</option><option>Cat</option></select></div>
+          <div class="field"><label for="f-size">Approx. size / breed</label><input id="f-size" placeholder="e.g. Medium, Cocker Spaniel"></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label for="f-in">Arrival date</label><input id="f-in" type="date"></div>
+          <div class="field"><label for="f-out">Departure date</label><input id="f-out" type="date"></div>
+        </div>
+        <div class="field"><label for="f-msg">Anything we should know?</label><textarea id="f-msg" rows="3"></textarea></div>
+        <button class="cta-btn" type="submit" style="justify-self:start;">Send enquiry</button>
+        <p class="form-note">Prototype form for coursework: nothing is sent anywhere. This demonstrates the confirmation step the live site would need.</p>
+      </form>
+    </div>
+    <div class="contact-direct">
+      <div><h3>Call us</h3><p>01543 671082<br>07752 214378</p></div>
+      <div><h3>Email us</h3><p>w.naylor@sky.com</p></div>
+      <div><h3>Visit us</h3><p>Lichfield Road, Burntwood, Staffs, WS7 0HU</p></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <p>Redesign concept created for an HCI/UX coursework project. Not affiliated with or endorsed by Edial Kennels &amp; Cattery. Original facts and rates shown are drawn from the business's own public website.</p>
+</footer>
+
+<script>
+  const navButtons = document.querySelectorAll('[data-view]');
+  function showView(name){
+    document.querySelectorAll('.view').forEach(s => s.classList.toggle('active', s.dataset.section === name));
+    document.querySelectorAll('nav.main-nav button').forEach(b => {
+      if(b.dataset.view === name){ b.setAttribute('aria-current','page'); } else { b.removeAttribute('aria-current'); }
+    });
+    window.scrollTo({top:0, behavior:'instant'});
+  }
+  navButtons.forEach(btn => btn.addEventListener('click', () => { if(btn.dataset.view) showView(btn.dataset.view); }));
+
+  const form = document.getElementById('enquiry-form');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('f-name').value || 'there';
+    const pet = document.getElementById('f-pet').value;
+    document.getElementById('enquiry-wrap').innerHTML = `
+      <div class="confirm-panel" role="status">
+        <div class="stamp">RECEIVED</div>
+        <h3 style="font-style:italic;">Thank you, ${name.split(' ')[0]}</h3>
+        <p>We've noted your ${pet.toLowerCase()}'s details. On the real site, this is the point we'd ring or email you back within one business day to confirm space. For now, call 01543 671082 to sort dates directly.</p>
+      </div>`;
+  });
+</script>
+</body>
+</html>
