@@ -8,6 +8,6 @@ Not affiliated with or endorsed by Edial Kennels & Cattery. Facts and rates show
 
 ## Viewing this project
 
-Once GitHub Pages is enabled for this repository, the live page is available at:
+The live page is available at:
 
-https://laibafida1.github.io/Human-Computer-Interaction/
+https://laibafida1.github.io/hci-redesign-concept/
