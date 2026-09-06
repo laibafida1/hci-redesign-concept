@@ -1,6 +1,8 @@
-# Edial Kennels & Cattery — Redesign Concept
+# Edial Kennels & Cattery Redesign Concept
 
 A redesign of edialkennels.co.uk created for an HCI/UX coursework project (CS3014, Applied Human Computer Interaction).
+
+This is entirely for educational purposes.
 
 The original site's problems and this redesign's fixes are documented separately in the accompanying analysis document.
 
