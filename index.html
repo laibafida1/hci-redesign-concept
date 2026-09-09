@@ -26,32 +26,6 @@
     --teal: #2E6B63;
     --teal-dark: #204E48;
   }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --paper: #131A13;
-      --paper-deep: #0F140F;
-      --paper-card: #1C241B;
-      --ink: #E7F0DE;
-      --ink-soft: #A9BFA0;
-      --green: #9FC4A7;
-      --green-light: #8FB396;
-      --oxblood: #E0AA4E;
-      --oxblood-dark: #EFC17A;
-      --brass: #E0AA4E;
-      --line: #33422F;
-      --focus: #E0AA4E;
-      --rust: #E08A5F;
-      --rust-dark: #F0A87D;
-      --teal: #7FC2B8;
-      --teal-dark: #A9D8D0;
-    }
-  }
-  :root[data-theme="dark"]{
-    --paper: #131A13; --paper-deep: #0F140F; --paper-card: #1C241B;
-    --ink: #E7F0DE; --ink-soft: #A9BFA0; --green: #9FC4A7; --green-light: #8FB396;
-    --oxblood: #E0AA4E; --oxblood-dark: #EFC17A; --brass: #E0AA4E; --line: #33422F; --focus: #E0AA4E;
-    --rust: #E08A5F; --rust-dark: #F0A87D; --teal: #7FC2B8; --teal-dark: #A9D8D0;
-  }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
@@ -96,7 +70,6 @@
   .cta-btn:hover{background:var(--oxblood-dark);}
   .cta-btn:active{transform:translateY(1px);}
   .cta-btn.ghost{background:transparent; border:1.5px solid var(--green); color:var(--ink);}
-  :root[data-theme="dark"] .cta-btn.ghost, @media (prefers-color-scheme:dark){.cta-btn.ghost{border-color:var(--green-light);}}
 
   main{max-width:1080px; margin:0 auto; padding:2.6rem 1.2rem 4rem;}
   .view{display:none;}
